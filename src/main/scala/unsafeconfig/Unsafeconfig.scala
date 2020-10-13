@@ -39,7 +39,6 @@ object UnsafeConfig {
     }
   }
 
-
   def getConfigOrFail[T](config: Config, field: String, dataType: Class[T]): T = {
     if (config.hasPath(field)) {
       val ret = dataType match {

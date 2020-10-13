@@ -1,10 +1,14 @@
 package sales
 
 /**
- *  ++ Function composition ++
+ *  +++ Function composition +++
  *
- *  Sales Tax
- *  ---------
+ *  ### Goal ###
+ *  - Interview exercise for a java position, wrote 14 files / class :8
+ *  - No design pattern such as strategy / visitor
+ *  - Program with only functions / remove objects
+ *
+ *  ### Sales Tax ###
  *  - Write an application that prints out the receipt details for these shopping baskets.
  *  - Tax rate of 10% on all goods, except books, food, and medical products that are exempt.
  *  - Import duty is an additional sales tax applicable on all imported goods at a rate of 5%, with no exemptions.
@@ -71,12 +75,33 @@ object SalesTax {
   val taxCalculator: TaxCalculator = ???
 
   type InputPrinter = List[Item] => String
-  val inputPrinter: InputPrinter = ???
+  val inputPrinter: InputPrinter = {
+    val _ = "1 bottle of perfume at 18.99"
+    ???
+  }
 
   type OutputPrinter = List[Item] => String
-  val outputPrinterCalculator: OutputPrinter = ???
+  val outputPrinter: OutputPrinter = {
 
-  def print(inputPrinter: InputPrinter, outputPrinter: OutputPrinter): ShoppingCart => String = ???
+    """1 bottle of perfume : 20.89
+      |Sales Taxes: 3.40
+      |Total: 50.72
+      |""".stripMargin
+    ???
+  }
+
+  def print(inputPrinter: InputPrinter, outputPrinter: OutputPrinter): ShoppingCart => String = {
+    """
+      |INPUT:
+      |
+      |Input 1:
+      |
+      |OUTPUT:
+      |
+      |Output 1:""".stripMargin
+
+    ???
+  }
 
 
   def main(args: Array[String]): Unit = {

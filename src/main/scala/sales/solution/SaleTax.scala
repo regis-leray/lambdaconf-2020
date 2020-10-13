@@ -44,7 +44,7 @@ object SaleTax {
   type InputPrinter = List[Item] => String
   val inputPrinter: InputPrinter = _.map{
       case Item(q, price, ItemCategory(name)) => f"$q $name at $price%1.2f"
-    }.mkString("\n", "\n", "")
+    }.mkString("\n")
 
   type OutputPrinter = List[Item] => String
   type OutputTaxCalculatorPrinter = TaxCalculator => OutputPrinter
@@ -59,8 +59,7 @@ object SaleTax {
     // Total
     val total = items.map(i => i.total + tax(i)).sum
 
-    f"""
-       |$output
+    f"""$output
        |Sales Taxes: $totalTaxes%1.2f
        |Total: $total%1.2f
        |""".stripMargin
@@ -71,19 +70,28 @@ object SaleTax {
   def print(inputPrinter: InputPrinter, outputPrinter: OutputPrinter): ShoppingCart => String = { cart =>
     val input = cart.map(inputPrinter)
       .zipWithIndex
-      .map{ case (s, i) => s"\nInput ${i+1}: $s"  }
+      .map{ case (s, i) =>
+        s"""Input ${i+1}:
+           |$s
+           |""".stripMargin
+      }
       .mkString("\n")
 
     val output = cart.map(outputPrinter)
       .zipWithIndex
-      .map{ case (s, i) => s"\nOutput ${i+1}: $s"}
+      .map{ case (s, i) =>
+        s"""Output ${i+1}:
+           |$s""".stripMargin
+      }
       .mkString("\n")
 
     s"""
       |INPUT:
+      |
       |$input
       |
       |OUTPUT:
+      |
       |$output
       |""".stripMargin
   }
